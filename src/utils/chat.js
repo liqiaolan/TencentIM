@@ -1,7 +1,6 @@
 import TIM from 'tim-js-sdk';
 import tim from './init.js';
 
-let is;
 /**
  * 登录即时通信接口
  * @param {userID,userSig} options
