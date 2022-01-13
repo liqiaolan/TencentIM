@@ -1,8 +1,17 @@
 import TIM from 'tim-js-sdk';
 import TIMUploadPlugin from 'tim-upload-plugin';
 
+let SDKAppID = '1400149648';
+const pattern =
+  /((2(5[0-5]|[0-4]\d))|[01]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[01]?\d{1,2})){3}/g;
+if (
+  !!location.hostname.match(/(dev|integration|stable|localhost|perf)/) ||
+  pattern.test(location.hostname)
+) {
+  SDKAppID = '1400331772'; // 测试库
+}
 let options = {
-  SDKAppID: '1400331772', // 接入时需要将0替换为您的即时通信 IM 应用的 SDKAppID
+  SDKAppID,
 };
 let tim = TIM.create(options); // SDK 实例通常用 tim 表示
 
