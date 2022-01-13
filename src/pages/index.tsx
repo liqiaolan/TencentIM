@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
-  loginIM,
   logoutIM,
-  onListener,
+  initializeIM,
   offListener,
   setMessageReadIM,
   getMessageListIM,
@@ -13,7 +12,7 @@ import {
 const Home = () => {
   const [nextReqMessageID, setNextReqMessageID] = useState('');
   let loginOption = {
-    accountId: '910300000369346974',
+    userID: '910300000369346974',
     userSig:
       'eJw1js0OgjAQhN+lVw32jxZMvHDpQeEAxPRq0oKrQSsQxBjfXWhgb7PfzGS+qDwVgR0dtBbtEQmliPB8aOvJYNvpTYNVd+Z+cQ7M7OUYM0akpAsDYx89VOAjMcHMFzERMy5iydcGqCf8LqyRqqNQZsPxqUf9UbuNTJNXnmRO3fKo1uf62uTUpYcl2EPjJwrCw4hSzNHvDzx/NFQ=',
   };
@@ -41,14 +40,8 @@ const Home = () => {
       default:
         break;
     }
-    console.log(event);
-    // setIsSDKReady(true);
   };
-  onListener(handleListener);
-  loginIM({
-    userID: loginOption.accountId,
-    userSig: loginOption.userSig,
-  });
+  initializeIM(loginOption, handleListener);
 
   return (
     <div>

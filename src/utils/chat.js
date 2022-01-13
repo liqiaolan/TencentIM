@@ -1,20 +1,21 @@
 import TIM from 'tim-js-sdk';
 import tim from './init.js';
 
+let is;
 /**
  * 登录即时通信接口
  * @param {userID,userSig} options
  */
-const loginIM = (option, success) => {
+const loginIM = (option) => {
   let promise = tim.login(option);
   if (promise) {
     promise
       .then(function (imResponse) {
         // 标识账号已登录，本次登录操作为重复登录。v2.5.1 起支持
         if (imResponse.data.repeatLogin === true) {
-          typeof success == 'function' && success(true);
+          console.log('重复登录');
         } else {
-          typeof success == 'function' && success(true);
+          console.log('第一次登录');
         }
       })
       .catch(function (imError) {
@@ -102,6 +103,15 @@ const offListener = (handleListener) => {
   tim.off(TIM.EVENT.MESSAGE_RECEIVED, handleListener);
   tim.off(TIM.EVENT.CONVERSATION_LIST_UPDATED, handleListener);
   tim.off(TIM.EVENT.ERROR, handleListener);
+};
+/**
+ * 初始化接口 initializeIM
+ * 让用户调用一个API，实现登录和监听事件
+ * option为登录所需参数 handleListener为注册事件回调
+ */
+const initializeIM = (option, handleListener) => {
+  onListener(handleListener);
+  loginIM(option);
 };
 /**
  * 创建文本消息接口
@@ -277,9 +287,8 @@ const sendMessageIM = async (msgType, msgData) => {
 };
 
 export {
-  loginIM,
+  initializeIM,
   logoutIM,
-  onListener,
   offListener,
   setMessageReadIM,
   getMessageListIM,
