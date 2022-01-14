@@ -1,0 +1,13 @@
+{
+  "name": "wm-chat",
+  "version": "1.0.0",
+  "description": "wm-chat",
+  "main": "src/index",
+  "scripts": {},
+  "author": "hahaguo",
+  "license": "ISC",
+  "dependencies": {
+    "tim-js-sdk": "^2.16.0",
+    "tim-upload-plugin": "^1.0.4"
+  }
+}
